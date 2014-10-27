@@ -6,7 +6,7 @@
  * @param  {document} d document
  */
 (function (w, d) {
-	console.log("%cmQ lib v0.1", "color:red; background:#1b357d; font-size: 14pt");
+	console.log("%cmQ lib v0.1.1", "color:red; background:#1b357d; font-size: 14pt");
 	console.time('mQ init');
 	/**
 	 * FFSM - Micro fluent API helper
@@ -47,7 +47,7 @@
 	 */
 	var mQ = function (elem, all) {
 		// Is angularJS around?
-		if (ng) { return  all ? mQuery.ng_qsa(elem): mQuery.ng_qs(elem); }
+		if (ng) { console.log('ANGULARJS DETECTED!'); return  all ? mQuery.ng_qsa(elem): mQuery.ng_qs(elem); }
 		// Vanilla JS fallback
 		else{ return all ? mQuery.qsa(elem): mQuery.qs(elem);} 
 	};
@@ -157,8 +157,16 @@
     //----------------------------------------------------------------------------------//
     
     // Setup mQuery DOM selector
-    if (jq) w.mQ = mQ;
-    if (!jq || !jq && ng) w.$ = mQ; 
+    if (jq) {
+    	console.log('jQuery loaded!'); 
+    	w.mQ = mQ;
+    	if (ng) console.log('AngularJS loaded!'); w.mQ = mQ;
+    }
+    
+    if (!jq || (!jq && ng)) {
+    	 console.log('AngularJS loaded!'); 
+    	w.$ = mQ; 
+    }
 
     //tests
     w.Qlite = Qlite;
