@@ -2,6 +2,7 @@
 
 Super small mini Javascript "framework" with a bunch of tools!
 
+- [FFSM](https://github.com/0x01/mu-ffsm) - Micro fluent API helper
 - Handly AngularJs or Vanilla Javascript DOM selector for single or multiple targets.
 - Custom Log, Info, Warn, Error functions
 - 3 new methods LocalStorage
@@ -25,11 +26,11 @@ $( "b" ).append( $( "b" ).clone().prepend(' - ') );
 
 Usage with AngularJS AND jQuery:
 ```
-$$('.par, .par1, #hdr').addClass('red').append( "<strong>Hello</strong>" );
-$$( '#checkin' ).bind( "click", function() {
+mQ('.par, .par1, #hdr').addClass('red').append( "<strong>Hello</strong>" );
+mQ( '#checkin' ).bind( "click", function() {
 	alert( "User clicked on 'foo.'" );
 });
-$$( "b" ).append( $( "b" ).clone().prepend(' - ') );
+mQ( "b" ).append( $( "b" ).clone().prepend(' - ') );
 ```
 
 Usage with Vanilla Javascript:
