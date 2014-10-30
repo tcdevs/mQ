@@ -115,8 +115,38 @@
         // Runs the passed function on every word, similar to Array.prototype.forEach
         forEachWord: function( fn ) { var string = this, i = -1; string.replace(/\b([\w\-]+)\b/g, function( match, word ){ fn.call( string, word, ++i ); return match; }); return true; },
         // Runs the Array.sort() method on every character of the string.
-        sort: function() { return Array.prototype.sort.apply( this.split(''), arguments ).join(''); }
-	};
+        sort: function() { return Array.prototype.sort.apply( this.split(''), arguments ).join(''); },
+
+        // "hello world".startsWith( "h" ); => true
+        startsWith: function( str ) { return str.length > 0 && this.substring( 0, str.length ) === str; },
+        // "hello world".endsWith( "d" ); => true
+        endsWith: function( str ) { return str.length > 0 && this.substring( this.length - str.length, this.length ) === str; },
+        // "Chris West".replaceAll("s", "z") => Chriz Wezt
+        replaceAll: function(target, replacement) { return this.split(target).join(replacement); },
+        // 'lul'.replaceAt(1, 'o')
+        replaceAt: function(index, character) { return this.substr(0, index) + character + this.substr(index + character.length); },
+
+	    
+
+        // "<div class="article">This is an article</div>".escapeHTML() » "&lt;div class="article"&gt;This is an article&lt;/div&gt;"
+        escapeHTML: function(string) { return this.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); },
+	    // "x &gt; 10".unescapeHTML() » "x > 10"
+	    unescapeHTML: function() { return this.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'); },
+
+	    // 'too \n much \n space'.compact() -> 'too much space'
+    	// 'enough \n '.compact()           -> 'enought'
+    	compact: function() { return this.trim().replace(/([\r\n\s　])+/g, function(match, whitespace){ return whitespace === '　' ? whitespace : ' '; }); },
+    	// 'schfifty five'.remove('f')      -> 'schifty five'
+    	// 'schfifty five'.remove(/f/g)     -> 'schity ive'
+		// 'schfifty five'.remove(/[a-f]/g) -> 'shity iv'
+    	remove: function(f) { return this.replace(f, ''); },
+
+    	urlEncode: function() { return encodeURIComponent(this); },
+		urlDecode: function() { return decodeURIComponent(this); }
+
+	    
+
+    };
 
 	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 	var numberMethods = {
